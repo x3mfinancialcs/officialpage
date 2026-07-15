@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>X3M Financial Consultancy Services | Collateral &amp; Non-Collateral Loan Assistance, Philippines</title>
+<meta name="description" content="X3M Financial Consultancy Services helps Filipino individuals, entrepreneurs, and businesses access reliable collateral and non-collateral loan solutions with fast, transparent, client-focused assistance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ============ TOKENS ============ */
+:root{
+  --black:        #0a0908;
+  --black-soft:   #131110;
+  --charcoal:     #1c1916;
+  --charcoal-2:   #221e19;
+  --hairline:     rgba(201,162,39,0.25);
+  --hairline-soft:rgba(201,162,39,0.14);
+  --gold:         #c9a227;
+  --gold-light:   #e8c468;
+  --gold-pale:    #f4e4b8;
+  --cream:        #f2ede2;
+  --cream-dim:    #cfc9bb;
+  --red:          #9c1d1d;
+  --red-light:    #c23b3b;
+  --shadow:       0 20px 60px rgba(0,0,0,0.45);
+  --radius:       2px;
+  --disp:         'Fraunces', serif;
+  --body:         'Inter', sans-serif;
+  --ease:         cubic-bezier(.16,.84,.44,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  margin:0;
+  background:var(--black);
+  color:var(--cream);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4{ font-family:var(--disp); font-weight:600; margin:0; color:var(--cream); }
+p{ margin:0; }
+section{ position:relative; }
+.container{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+/* ============ SHARED PATTERNS ============ */
+.eyebrow{
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--body); font-weight:700; font-size:12px;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:18px;
+}
+.eyebrow .x-mark{ width:14px; height:14px; flex-shrink:0; }
+.section-head{ max-width:640px; margin-bottom:56px; }
+.section-head h2{ font-size:clamp(30px,4vw,44px); line-height:1.15; letter-spacing:-.01em; }
+.section-head .sub{ margin-top:18px; color:var(--cream-dim); font-size:16.5px; max-width:560px; }
+.section-head.centered{ margin-left:auto; margin-right:auto; text-align:center; }
+.section-head.centered .eyebrow{ justify-content:center; }
+
+.divider{ height:1px; background:var(--hairline); border:0; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:15px 30px; font-family:var(--body); font-weight:600; font-size:14px;
+  letter-spacing:.04em; border-radius:var(--radius); cursor:pointer;
+  border:1px solid transparent; transition:transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+  white-space:nowrap;
+}
+.btn-gold{ background:linear-gradient(180deg,var(--gold-light),var(--gold)); color:#161208; }
+.btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(201,162,39,.28); }
+.btn-outline{ background:transparent; color:var(--cream); border-color:rgba(242,237,226,.35); }
+.btn-outline:hover{ border-color:var(--gold); color:var(--gold-light); transform:translateY(-2px); }
+.btn-block{ width:100%; }
+
+.pill{
+  display:inline-block; padding:8px 16px; border:1px solid var(--hairline);
+  border-radius:20px; font-size:12.5px; color:var(--cream-dim); letter-spacing:.02em;
+}
+
+/* reveal-on-scroll */
+.reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+/* ============ HEADER ============ */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:18px 0; background:transparent; border-bottom:1px solid transparent;
+  transition:background .35s var(--ease), border-color .35s var(--ease), padding .35s var(--ease);
+}
+.site-header.scrolled{
+  background:rgba(10,9,8,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom-color:var(--hairline); padding:12px 0;
+}
+/* Fix: backdrop-filter creates a new containing block for fixed-position
+   descendants. That breaks the full-screen mobile nav overlay below (which
+   relies on position:fixed being relative to the viewport, not the header).
+   Drop the blur while the mobile menu is open so the overlay stays anchored
+   to the viewport correctly. */
+.site-header.menu-open{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.brand{ display:flex; align-items:center; gap:12px; min-width:0; }
+.brand-mark{ width:42px; height:42px; flex-shrink:0; }
+.brand-text{ font-family:var(--disp); line-height:1.1; min-width:0; }
+.brand-text .b1{ display:block; font-size:16px; letter-spacing:.03em; color:var(--gold-light); white-space:nowrap; }
+.brand-text .b2{ display:block; font-family:var(--body); font-size:9.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--cream-dim); margin-top:2px; white-space:nowrap; }
+
+.main-nav{ display:flex; align-items:center; gap:34px; }
+.main-nav a{
+  font-size:13.5px; font-weight:500; color:var(--cream-dim); letter-spacing:.02em;
+  position:relative; padding:4px 0; transition:color .2s;
+}
+.main-nav a::after{
+  content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold);
+  transition:width .25s var(--ease);
+}
+.main-nav a:hover{ color:var(--cream); }
+.main-nav a:hover::after{ width:100%; }
+
+.header-actions{ display:flex; align-items:center; gap:18px; }
+.nav-toggle{ display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:10px; margin:-10px; }
+.nav-toggle span{ width:22px; height:1.5px; background:var(--cream); display:block; transition:transform .25s, opacity .25s; }
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100vh; display:flex; align-items:center;
+  padding:150px 0 90px;
+  background:
+    radial-gradient(ellipse 900px 600px at 78% 18%, rgba(201,162,39,0.16), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 10% 90%, rgba(156,29,29,0.10), transparent 60%),
+    var(--black);
+  overflow:hidden;
+}
+.hero-watermark{
+  position:absolute; right:-8%; top:50%; transform:translateY(-50%);
+  width:min(60vw,780px); opacity:.05; pointer-events:none; z-index:0;
+}
+.hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:center; position:relative; z-index:1; }
+.hero-eyebrow{ margin-bottom:22px; }
+.hero h1{
+  font-size:clamp(38px,5.4vw,64px); line-height:1.06; letter-spacing:-.015em;
+  color:var(--cream);
+}
+.hero h1 em{ font-style:italic; color:var(--gold-light); }
+.hero .lead{ margin-top:26px; font-size:18px; color:var(--cream-dim); max-width:520px; }
+.hero-ctas{ display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
+.hero-note{ margin-top:34px; display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--cream-dim); letter-spacing:.03em; }
+.hero-note .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+.hero-badge-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
+.hero-badge-ring{
+  position:absolute; width:120%; height:120%; border:1px solid var(--hairline-soft); border-radius:50%;
+  animation:spin 60s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.hero-badge{ width:min(78%,380px); filter:drop-shadow(0 30px 60px rgba(201,162,39,.18)); }
+
+/* ============ TRUST STRIP ============ */
+.trust-strip{ border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); background:var(--black-soft); }
+.trust-grid{ display:grid; grid-template-columns:repeat(4,1fr); }
+.trust-item{
+  padding:26px 22px; text-align:center; font-size:13.5px; font-weight:500; color:var(--cream-dim);
+  letter-spacing:.01em; border-right:1px solid var(--hairline);
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.trust-item:last-child{ border-right:0; }
+.trust-item svg{ width:17px; height:17px; flex-shrink:0; color:var(--gold); }
+
+/* ============ ABOUT ============ */
+.about{ padding:130px 0; }
+.about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.about-copy p{ color:var(--cream-dim); font-size:16px; margin-bottom:18px; }
+.about-copy p:last-child{ margin-bottom:0; }
+.about-stats{ display:flex; gap:40px; margin-top:38px; flex-wrap:wrap; }
+.stat b{ display:block; font-family:var(--disp); font-size:30px; color:var(--gold-light); }
+.stat span{ font-size:12.5px; color:var(--cream-dim); letter-spacing:.03em; }
+
+.about-media{ position:relative; }
+.frame{
+  position:relative; padding:18px; border:1px solid var(--hairline);
+}
+.frame img{ width:100%; height:auto; filter:grayscale(.08) contrast(1.04); }
+.frame::before, .frame::after{
+  content:''; position:absolute; width:26px; height:26px; border:2px solid var(--gold);
+}
+.frame::before{ top:-2px; left:-2px; border-right:0; border-bottom:0; }
+.frame::after{ bottom:-2px; right:-2px; border-left:0; border-top:0; }
+.about-caption{
+  margin-top:20px; font-size:13.5px; color:var(--cream-dim); font-style:italic;
+  border-left:2px solid var(--gold); padding-left:14px;
+}
+
+/* ============ SERVICES ============ */
+.services{ padding:130px 0; background:var(--black-soft); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+.service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); }
+.service-card{ background:var(--black-soft); padding:44px 36px; position:relative; }
+.service-card .num{ font-family:var(--disp); font-size:13px; color:var(--gold); letter-spacing:.1em; }
+.service-icon{ width:44px; height:44px; margin:22px 0 22px; color:var(--gold-light); }
+.service-card h3{ font-size:22px; margin-bottom:14px; }
+.service-card p{ color:var(--cream-dim); font-size:14.5px; margin-bottom:20px; }
+.service-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+.service-tags span{ font-size:11.5px; letter-spacing:.03em; color:var(--gold-pale); border:1px solid var(--hairline); padding:5px 10px; border-radius:14px; }
+
+.purpose-strip{ margin-top:44px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; justify-content:center; }
+.purpose-strip .label{ font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cream-dim); margin-right:6px; }
+.purpose-strip .pill{ background:var(--charcoal); }
+
+/* ============ WHY US ============ */
+.why-us{ padding:130px 0; }
+.why-media{ border:1px solid var(--hairline); box-shadow:var(--shadow); overflow:hidden; }
+.why-media img{ width:100%; }
+
+/* ============ PROCESS ============ */
+.process{ padding:130px 0; background:var(--black-soft); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+.process-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+.process-grid::before{
+  content:''; position:absolute; top:26px; left:6%; right:6%; height:1px; background:var(--hairline);
+}
+.process-step{ padding:0 26px; position:relative; text-align:left; }
+.process-num{
+  width:52px; height:52px; border-radius:50%; border:1px solid var(--gold);
+  display:flex; align-items:center; justify-content:center; font-family:var(--disp); font-size:18px; color:var(--gold-light);
+  background:var(--black-soft); position:relative; z-index:1; margin-bottom:24px;
+}
+.process-step h4{ font-size:17px; margin-bottom:10px; }
+.process-step p{ font-size:14px; color:var(--cream-dim); }
+
+/* ============ TESTIMONIALS ============ */
+.testimonials{ padding:130px 0; }
+.testi-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); }
+.testi-card{ background:var(--black); padding:36px 32px; display:flex; flex-direction:column; gap:18px; }
+.testi-stars{ display:flex; gap:4px; color:var(--gold); }
+.testi-stars svg{ width:16px; height:16px; }
+.testi-quote{ color:var(--cream-dim); font-size:14.5px; line-height:1.7; }
+.testi-name{ font-family:var(--disp); font-size:15px; color:var(--gold-light); }
+.testi-role{ font-size:12px; color:var(--cream-dim); letter-spacing:.03em; }
+
+/* ============ FAQ ============ */
+.faq{ padding:130px 0; background:var(--black-soft); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+.faq-list{ max-width:820px; margin:0 auto; }
+.faq-item{ border-bottom:1px solid var(--hairline); }
+.faq-item:first-child{ border-top:1px solid var(--hairline); }
+.faq-q{
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:24px 4px; cursor:pointer; background:none; border:0; width:100%; text-align:left;
+  font-family:var(--disp); font-size:18px; color:var(--cream);
+}
+.faq-q .plus{ font-family:var(--body); font-size:22px; color:var(--gold); flex-shrink:0; transition:transform .25s var(--ease); }
+.faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .35s var(--ease); }
+.faq-a p{ padding:0 4px 24px; color:var(--cream-dim); font-size:14.5px; max-width:680px; }
+
+/* ============ FINAL CTA ============ */
+.final-cta{ padding:110px 0; text-align:center; }
+.final-cta-inner{
+  max-width:720px; margin:0 auto; border:1px solid var(--hairline); padding:64px 48px;
+  background:radial-gradient(ellipse 500px 300px at 50% 0%, rgba(201,162,39,0.12), transparent 70%);
+}
+.final-cta h2{ font-size:clamp(28px,3.6vw,38px); margin-bottom:16px; }
+.final-cta p{ color:var(--cream-dim); font-size:15.5px; margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto; }
+.final-cta .hero-ctas{ justify-content:center; }
+
+/* ============ LEGAL ============ */
+.legal{ padding:120px 0; }
+.legal-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); margin-top:10px; }
+.legal-card{ background:var(--black); padding:30px 32px; }
+.legal-card h4{
+  display:flex; align-items:center; gap:10px; font-family:var(--body); font-size:13.5px;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--gold-light); margin-bottom:12px;
+}
+.legal-card h4 svg{ width:16px; height:16px; color:var(--gold); flex-shrink:0; }
+.legal-card p{ font-size:14px; color:var(--cream-dim); overflow-wrap:anywhere; }
+.legal-card .fill{ color:var(--gold-pale); border-bottom:1px dashed var(--gold); }
+.legal-footnote{ margin-top:26px; font-size:12.5px; color:var(--cream-dim); opacity:.8; }
+
+/* ============ CONTACT ============ */
+.contact{ padding:130px 0; background:var(--black-soft); border-top:1px solid var(--hairline); }
+.contact-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:70px; }
+.contact-card{ border:1px solid var(--hairline); padding:26px 24px; margin-bottom:1px; }
+.contact-list{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hairline); border:1px solid var(--hairline); }
+.contact-list .contact-card{ background:var(--black); border:0; margin:0; }
+.contact-card h4{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.contact-card p{ color:var(--cream); font-size:15px; overflow-wrap:anywhere; }
+.contact-card .fill{ color:var(--gold-pale); border-bottom:1px dashed var(--gold); }
+
+.contact-panel{
+  border:1px solid var(--hairline); padding:36px; background:var(--black);
+  text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.contact-panel h3{ font-size:24px; margin-bottom:14px; }
+.contact-panel p{ color:var(--cream-dim); font-size:14.5px; margin-bottom:24px; }
+
+/* ============ FOOTER ============ */
+footer{ border-top:1px solid var(--hairline); padding:70px 0 30px; }
+.footer-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:50px; }
+.footer-brand{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.footer-brand img{ width:38px; height:38px; }
+.footer-brand span{ font-family:var(--disp); font-size:16px; color:var(--gold-light); }
+.footer-col h5{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--cream-dim); margin-bottom:16px; }
+.footer-col ul li{ margin-bottom:10px; }
+.footer-col ul li a{ font-size:14px; color:var(--cream-dim); transition:color .2s; }
+.footer-col ul li a:hover{ color:var(--gold-light); }
+.footer-desc{ font-size:14px; color:var(--cream-dim); max-width:320px; }
+.footer-bottom{ padding-top:26px; border-top:1px solid var(--hairline); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+.footer-bottom p{ font-size:12.5px; color:var(--cream-dim); opacity:.75; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:980px){
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-badge-wrap{ order:-1; max-width:280px; margin:0 auto; }
+  .about-grid, .contact-grid{ grid-template-columns:1fr; gap:48px; }
+  .service-grid{ grid-template-columns:1fr; }
+  .process-grid{ grid-template-columns:1fr 1fr; row-gap:44px; }
+  .process-grid::before{ display:none; }
+  .testi-grid{ grid-template-columns:1fr; }
+  .legal-grid{ grid-template-columns:1fr; }
+  .contact-list{ grid-template-columns:1fr; }
+  .footer-top{ grid-template-columns:1fr 1fr; }
+  .trust-grid{ grid-template-columns:1fr 1fr; }
+  .trust-item{ border-bottom:1px solid var(--hairline); }
+}
+@media (max-width:760px){
+  .main-nav, .header-actions .btn{ display:none; }
+  .nav-toggle{ display:flex; }
+  .container{ padding:0 22px; }
+  .hero{ padding:130px 0 60px; }
+  .about, .services, .why-us, .process, .testimonials, .faq, .final-cta, .legal, .contact{ padding:80px 0; }
+  .footer-top{ grid-template-columns:1fr; gap:34px; }
+  .trust-grid{ grid-template-columns:1fr; }
+  .hero-ctas .btn, .hero-ctas a{ width:100%; }
+  .final-cta-inner{ padding:44px 26px; }
+  .site-header.menu-open .main-nav{
+    display:flex; position:fixed; inset:0; top:70px; background:var(--black);
+    flex-direction:column; padding:40px 30px; gap:26px; border-top:1px solid var(--hairline);
+    overflow-y:auto;
+  }
+  .site-header.menu-open .main-nav a{ font-size:20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <img src="logo-mark.png" alt="X3M Financial Consultancy Services mark" class="brand-mark">
+      <span class="brand-text">
+        <span class="b1">X3M Financial</span>
+        <span class="b2">Consultancy Services</span>
+      </span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#how-it-works">Process</a>
+      <a href="#legal">Legal &amp; Privacy</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://forms.gle/BmWo2rKZtPcwiZqT8" target="_blank" rel="noopener" class="btn btn-gold">Book a Free Consultation</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <img src="logo-mark.png" alt="" class="hero-watermark" aria-hidden="true">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow reveal">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Financial Consultancy &middot; Philippines
+      </div>
+      <h1 class="reveal">Financial clarity.<br><em>Confident</em> decisions.</h1>
+      <p class="lead reveal">X3M Financial Consultancy Services connects individuals, entrepreneurs, and businesses across the Philippines with reliable collateral and non-collateral loan solutions — guided by consultants who stay with you from first inquiry to fund release.</p>
+      <div class="hero-ctas reveal">
+        <a href="https://forms.gle/BmWo2rKZtPcwiZqT8" target="_blank" rel="noopener" class="btn btn-gold">Book a Free Consultation</a>
+        <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-note reveal"><span class="dot"></span> Confidential consultations &middot; No obligation to proceed</div>
+    </div>
+    <div class="hero-badge-wrap reveal">
+      <div class="hero-badge-ring"></div>
+      <img src="logo-mark.png" alt="X3M gold emblem" class="hero-badge">
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6"/></svg>Collateral &amp; Non-Collateral Loans</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Fast, Transparent Processing</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.6"/></svg>Confidential by Design</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" stroke="currentColor" stroke-width="1.6"/></svg>Wide Network of Financial Partners</div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <div class="frame">
+        <img src="consultant-portrait.png" alt="An X3M financial consultant in a client meeting">
+      </div>
+      <p class="about-caption">Every client is paired with a dedicated consultant from first call to final release.</p>
+    </div>
+    <div class="about-copy">
+      <div class="eyebrow reveal">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        About X3M
+      </div>
+      <h2 class="reveal">A consultancy built on trust and follow-through</h2>
+      <div class="reveal" style="margin-top:24px;">
+        <p>X3M Financial Consultancy Services is a professional financial consultancy committed to helping individuals, entrepreneurs, and businesses gain access to reliable financial solutions. We specialize in facilitating both collateral and non-collateral loan assistance, alongside a range of financial support services tailored to each client's needs.</p>
+        <p>Our mission is simple: fast, reliable, and client-focused financial assistance. Whether you're securing working capital, purchasing property, or covering an urgent expense, we work as your trusted partner in reaching practical, accessible funding — with honest guidance at every step.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat"><b>2</b><span>Loan Categories<br>Collateral &amp; Non-Collateral</span></div>
+        <div class="stat"><b>100%</b><span>Client-Focused<br>Consultation Approach</span></div>
+        <div class="stat"><b>PH</b><span>Nationwide<br>Client Support</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head centered reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        What We Offer
+      </div>
+      <h2>Loan solutions matched to your situation</h2>
+      <p class="sub">From property-backed financing to unsecured lending, our consultants help you choose the path that fits your goals — and prepare an application that gives you the strongest chance of approval.</p>
+    </div>
+
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <span class="num">01</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M4 11l8-7 8 7" stroke="currentColor" stroke-width="1.5"/><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.5"/><path d="M10 19v-5h4v5" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Collateral Loan Assistance</h3>
+        <p>For clients who own real estate or other qualifying assets, we help structure secured loans that unlock better rates and stronger approval odds.</p>
+        <div class="service-tags"><span>Real Estate Mortgage</span><span>Property-Backed Financing</span><span>Asset-Secured Lines</span></div>
+      </div>
+      <div class="service-card">
+        <span class="num">02</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>Non-Collateral Loan Assistance</h3>
+        <p>No property to pledge? We match qualified individuals and businesses with unsecured loan options based on income, cash flow, and standing.</p>
+        <div class="service-tags"><span>Personal Loans</span><span>Business Working Capital</span><span>Income-Based Financing</span></div>
+      </div>
+      <div class="service-card">
+        <span class="num">03</span>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M15 9l-2.2 5.2L8 16l2.2-5.2L15 9z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <h3>Financial Consultancy Services</h3>
+        <p>Beyond loan placement, our consultants help you prepare documentation, evaluate terms, and choose the financing path that fits your goals.</p>
+        <div class="service-tags"><span>Document Preparation</span><span>Loan Structuring Advice</span><span>Lender Matching</span></div>
+      </div>
+    </div>
+
+    <div class="purpose-strip reveal">
+      <span class="label">Common Purposes We Support</span>
+      <span class="pill">Working Capital</span>
+      <span class="pill">Property Purchase</span>
+      <span class="pill">Medical Expenses</span>
+      <span class="pill">Equipment Purchase</span>
+      <span class="pill">Education</span>
+      <span class="pill">And More</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="why-us" id="why-us">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Why Clients Choose X3M
+      </div>
+      <h2>The values behind every application</h2>
+      <p class="sub">We measure success by whether a client's need was genuinely met — not just whether a form was filed.</p>
+    </div>
+    <div class="why-media reveal">
+      <img src="core-values.png" alt="X3M core values: Integrity, Excellence, Commitment, Professionalism, Customer Satisfaction. Why choose us: Professional and reliable service, fast and efficient processing, client-oriented assistance, wide network of financial partners, transparent and confidential transactions.">
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process" id="how-it-works">
+  <div class="container">
+    <div class="section-head centered reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        The Process
+      </div>
+      <h2>From inquiry to release in four clear steps</h2>
+    </div>
+    <div class="process-grid reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Consultation</h4>
+        <p>Tell us your goals and financial situation. We assess which loan type — collateral or non-collateral — fits best.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Documentation</h4>
+        <p>We guide you in preparing complete, accurate requirements so your application moves without delay.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Evaluation &amp; Matching</h4>
+        <p>Your application is reviewed and matched with the partner and terms best suited to your profile.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h4>Approval &amp; Release</h4>
+        <p>Once approved, funds are released — and your consultant stays available for any follow-up support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head centered reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Client Experiences
+      </div>
+      <h2>Real people, real approvals</h2>
+      <p class="sub">A snapshot of the kind of experience we aim to deliver on every application. Replace with verified quotes from your own clients (with their permission) once collected.</p>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+        </div>
+        <p class="testi-quote">Our consultant explained every fee upfront and checked in through the whole process. We knew exactly where our application stood at each stage.</p>
+        <div><div class="testi-name">Paul Ibay</div><div class="testi-role">Small Business Owner, Metro Manila</div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+        </div>
+        <p class="testi-quote">I didn't have property to put up, so I wasn't sure I'd qualify for anything. X3M matched me with a non-collateral option that fit my income.</p>
+        <div><div class="testi-name">John Singson</div><div class="testi-role">Freelance Professional</div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .9-5 5 1.3 7-6.3-3.5-6.3 3.5 1.3-7-5-5 7-.9z"/></svg>
+        </div>
+        <p class="testi-quote">The documentation checklist they gave us upfront saved so much back-and-forth. Funds were released faster than we expected.</p>
+        <div><div class="testi-name">Ryacenth Lugares</div><div class="testi-role">Property Buyer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head centered reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Common Questions
+      </div>
+      <h2>What borrowers usually ask</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span>Is X3M a lender or a bank?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. X3M is a financial consultancy and loan facilitation service. We are not a bank and do not directly extend credit — we help you prepare your application and match you with accredited lending and financing partners.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span>Do I need collateral to qualify?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Not necessarily. We offer both collateral loan assistance (backed by real estate or other qualifying assets) and non-collateral loan assistance based on income and cash flow, so we can explore options either way.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span>How long does the process usually take?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Timelines vary by loan type, partner, and how quickly documentation is completed. Your consultant will give you a realistic estimate during your consultation and keep you updated at each stage.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span>Is there a fee for the initial consultation?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. Initial consultations are free and confidential, with no obligation to proceed. Any applicable fees or charges tied to a specific loan are disclosed in writing before you sign anything, in line with the Truth in Lending Act.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button"><span>Is my personal information kept private?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Yes. Personal and financial information you share with us is handled in accordance with the Data Privacy Act of 2012 and is used only for loan processing and evaluation — never sold to third parties. See our full Privacy Policy for details.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEGAL & PRIVACY ============ -->
+<section class="legal" id="legal">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Legal &amp; Data Privacy
+      </div>
+      <h2>Operating within Philippine financial regulations</h2>
+      <p class="sub">We believe an informed borrower is a protected borrower. Here is a summary of how we operate and how your information is handled.</p>
+    </div>
+
+    <div class="legal-grid reveal">
+      <div class="legal-card">
+        <h4><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6"/></svg>Regulatory Disclosure</h4>
+        <p>X3M Financial Consultancy Services operates as a financial consultancy and loan facilitation service. We are not a bank and do not directly extend credit; loans are provided by accredited lending and financing partners in line with the Lending Company Regulation Act (RA 9474) and/or the Financing Company Act (RA 8556), as applicable.</p>
+        <p style="margin-top:10px;">TIN No.: <span class="fill">182-490-326-00000</span>. DTI Business Name No.: <span class="fill">8094190</span> (<a href="https://drive.google.com/file/d/1drfnv-bQJnYVA3rK6cF_bkdThisE-16s/view?usp=sharing">view document</a>).
+      </div>
+      <div class="legal-card">
+        <h4><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Truth in Lending</h4>
+        <p>In compliance with the Truth in Lending Act (RA 3765), all interest rates, finance charges, and loan terms are disclosed in writing before any agreement is signed. We encourage every client to review these disclosures carefully before proceeding.</p>
+      </div>
+      <div class="legal-card">
+        <h4><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.6"/></svg>Data Privacy</h4>
+        <p>Personal and financial information submitted through this site is collected, used, and stored in accordance with the Data Privacy Act of 2012 (RA 10173). It is used solely for loan processing and evaluation and is never sold to third parties. <a href="https://drive.google.com/file/d/1bBfNJ2hG_lhBHzhTG-Ye_2tigI7Y62Nq/view?usp=sharing">Full Privacy Policy</a>.</p>
+      </div>
+      <div class="legal-card">
+        <h4><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fair Collection Practices</h4>
+        <p>We adhere to fair debt collection standards consistent with SEC and BSP guidelines, protecting borrowers from harassment, threats, or unfair collection tactics at every stage of a loan.</p>
+      </div>
+    </div>
+    <p class="legal-footnote reveal">This summary is provided for general information and does not constitute legal advice. Business registration numbers, licenses, and full legal policies should be verified and completed by X3M Financial Consultancy Services prior to public launch.</p>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta">
+  <div class="container">
+    <div class="final-cta-inner reveal">
+      <h2>Ready to talk to a consultant?</h2>
+      <p>Booking a consultation costs nothing and puts no obligation on you. Tell us about your situation and we'll walk you through the loan options that actually fit.</p>
+      <div class="hero-ctas">
+        <a href="https://forms.gle/BmWo2rKZtPcwiZqT8" target="_blank" rel="noopener" class="btn btn-gold">Book a Free Consultation</a>
+        <a href="#contact" class="btn btn-outline">Contact Us Instead</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div>
+      <div class="eyebrow reveal">
+        <svg class="x-mark" viewBox="0 0 24 24" fill="none"><path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Contact Us
+      </div>
+      <h2 class="reveal" style="font-size:clamp(28px,3.6vw,38px); margin-bottom:24px;">Talk to a consultant today</h2>
+      <p class="reveal" style="color:var(--cream-dim); font-size:15.5px; max-width:480px; margin-bottom:34px;">Have a question before you book? Reach us through any of the channels below and a consultant will get back to you.</p>
+      <div class="contact-list reveal">
+        <div class="contact-card">
+          <h4>Phone</h4>
+          <p class="fill"><a href="tel:+639762739410">+63 976 273 9410</a></p>
+        </div>
+        <div class="contact-card">
+          <h4>Email</h4>
+          <p class="fill"><a href="mailto:x3mloansupport@gmail.com">x3mloansupport@gmail.com</a></p>
+        </div>
+        <div class="contact-card">
+          <h4>Office Address</h4>
+          <p class="fill">GF 112 Cityland Grand Central Residences, Sultan St, Mandaluyong City, Metro Manila, Philippines 1550</p>
+        </div>
+        <div class="contact-card">
+          <h4>Google Maps</h4>
+          <p class="fill"><a href="https://maps.app.goo.gl/epD2Gbc29ajB5ntD8">View our location on Google Maps</a></p>
+        </div>
+        <div class="contact-card">
+          <h4>Business Hours</h4>
+          <p class="fill">8:00 A.M. – 5:00 P.M., Monday to Friday (except holidays)</p>
+        </div>
+        <div class="contact-card">
+          <h4>Social Media</h4>
+          <p class="fill"><a href="https://www.facebook.com/profile.php?id=61590970297967">Our Facebook Page</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-panel reveal">
+      <h3>Schedule your appointment</h3>
+      <p>Send us an appointment request by filling out the form — a consultant will follow up to discuss your options, with no obligation to proceed.</p>
+      <a href="https://forms.gle/BmWo2rKZtPcwiZqT8" target="_blank" rel="noopener" class="btn btn-gold btn-block">Go to Appointment Form</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="logo-mark.png" alt="X3M logo">
+          <span>X3M Financial<br>Consultancy Services</span>
+        </div>
+        <p class="footer-desc">Fast, reliable, client-focused financial assistance for individuals, entrepreneurs, and businesses across the Philippines.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-us">Why Choose Us</a></li>
+          <li><a href="#how-it-works">Our Process</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Loans</h5>
+        <ul>
+          <li><a href="#services">Collateral Loans</a></li>
+          <li><a href="#services">Non-Collateral Loans</a></li>
+          <li><a href="https://forms.gle/BmWo2rKZtPcwiZqT8" target="_blank" rel="noopener">Book a Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#legal">Regulatory Disclosure</a></li>
+          <li><a href="#legal">Data Privacy Notice</a></li>
+          <li><a href="#legal">Truth in Lending</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 X3M Financial Consultancy Services. All rights reserved.</p>
+      <p>X3M Financial Consultancy Services is a financial consultancy and loan facilitation service, not a bank.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- header scroll state ----
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ---- mobile nav ----
+const navToggle = document.getElementById('navToggle');
+navToggle.addEventListener('click', () => {
+  const isOpen = header.classList.toggle('menu-open');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+document.querySelectorAll('.main-nav a').forEach(a => {
+  a.addEventListener('click', () => {
+    header.classList.remove('menu-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// ---- reveal on scroll ----
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+// ---- FAQ accordion ----
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(openItem => {
+      if(openItem !== item){
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    if(isOpen){
+      item.classList.remove('open');
+      a.style.maxHeight = null;
+    } else {
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
